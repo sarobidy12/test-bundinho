@@ -23,7 +23,7 @@ Tu dois exposer 4 routes API REST ainsi qu'un front (basique, en React) pour :
 6. npm install | yarn
 7. npm start
 
-# Envirenenent neccessai 
+# Envirenenent neccessaire
 
  - npm | yarn
  - Terminal 
