@@ -8,7 +8,7 @@ import ItemUser from "./ItemUser";
 import IUser from "../../Interface/User";
 import Grid from '@mui/material/Grid';
 import Moyen from "../Moyen";
-import { LoadingList } from "../Utils/Loading";
+import { LoadingList, EmptyResult } from "../Utils/Loading";
 
 interface IApp {
     UserStore: UserStoreInterface
@@ -52,28 +52,31 @@ const ListUser: FC = (props) => {
 
                 <Grid item={true} md={6} xs={12}>
 
-                    {console.log("sortByDate", sortByDate())}
-
                     {
                         UserStore.loading ? (
                             <LoadingList />
                         ) : (
-                            <>
-                                {
-
-                                    sortByDate()
-                                        .map((user: IUser) => <ItemUser
-                                            img={user.img}
-                                            firstName={user.firstName}
-                                            lastName={user.lastName}
-                                            note={user.note}
-                                            email={user.email}
-                                        />)
-                                }
+                            <>{sortByDate().length > 0 ? (
+                                <>
+                                    {
+                                        sortByDate()
+                                            .map((user: IUser) => <ItemUser
+                                                img={user.img}
+                                                firstName={user.firstName}
+                                                lastName={user.lastName}
+                                                note={user.note}
+                                                email={user.email}
+                                            />)
+                                    }
+                                </>
+                            ) : (
+                                <>
+                                    <EmptyResult />
+                                </>
+                            )}
                             </>
                         )
                     }
-
                 </Grid>
 
                 <Grid item={true} md={2} xs={12}>

@@ -2,7 +2,6 @@ import React, { FC, useEffect, useState } from 'react';
 import { UserStoreInterface } from "../../Store/UserStore";
 import { inject, observer } from 'mobx-react';
 import CardContent from '@mui/material/CardContent';
-import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import IUser from "../../Interface/User";
