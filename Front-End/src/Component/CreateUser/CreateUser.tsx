@@ -42,7 +42,7 @@ const CreateUser: FC = (props) => {
 
     const addNewUser = async (user: IUser) => {
 
-        setLoading(!loading);
+        setLoading(true);
 
         await UserStore.AddNewUSer(user)
             .then((res: any) => {
@@ -53,6 +53,7 @@ const CreateUser: FC = (props) => {
                         variant: "error",
                     });
 
+                    setLoading(false);
                     return;
                 }
 
@@ -60,13 +61,16 @@ const CreateUser: FC = (props) => {
                     variant: "success",
                 });
 
+                setLoading(false);
+                setOpenDialog(false);
+
             }).catch((err: any) => {
                 enqueueSnackbar("Une erreur est survenue", {
                     variant: "error",
                 });
-            }).finally(() => {
+                setLoading(false);
                 setOpenDialog(false);
-            });
+            })
 
     }
 

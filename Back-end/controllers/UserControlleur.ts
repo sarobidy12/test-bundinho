@@ -15,8 +15,17 @@ class USerController {
       note
     } = req.body as IUser;
 
-
     try {
+
+      // verify mail exist 
+
+      const verify = await User.find({
+        email: email
+      })
+
+      if (verify.length > 0) {
+        return res.status(200).send("email already exist")
+      }
 
       await User.create({
         firstName,

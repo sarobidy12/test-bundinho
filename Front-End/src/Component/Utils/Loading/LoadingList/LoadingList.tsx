@@ -23,9 +23,6 @@ const LoadingList: FC = () => {
                             <Skeleton variant="rectangular" width='80%' height={20} />
                         </Grid>
                         <br />
-                        <br />
-                        <br />
-                        <br />
                     </>
                 )
             }
