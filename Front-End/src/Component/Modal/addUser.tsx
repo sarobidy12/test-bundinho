@@ -12,16 +12,18 @@ export interface IDialog {
     handleClose: () => void;
     submit: (user: IUser) => void;
     loading: boolean;
+    formErreur: any;
 }
 
 const AddUser: FC<IDialog> = ({
     open,
     handleClose,
     submit,
-    loading
+    loading,
+    formErreur
 }) => {
 
-    const [dataUser, setDataUser] = useState<IUser | null>(null);
+    const [dataUser, setDataUser] = useState<IUser | any>({});
 
     const handleSubmit = (event: any) => {
 
@@ -31,7 +33,7 @@ const AddUser: FC<IDialog> = ({
 
         submit(dataUser as IUser | any);
 
-        setDataUser(null);
+        setDataUser({});
     }
 
     const handleChange = (event: any) => {
@@ -43,6 +45,7 @@ const AddUser: FC<IDialog> = ({
         } as IUser | any)
 
     }
+
     return (
         <div>
 
@@ -81,6 +84,7 @@ const AddUser: FC<IDialog> = ({
                             fullWidth={true}
                             onChange={handleChange}
                             value={dataUser?.firstName || ""}
+                            error={formErreur?.firstName}
                         />
 
                         <Input
@@ -92,6 +96,7 @@ const AddUser: FC<IDialog> = ({
                             onChange={handleChange}
                             fullWidth={true}
                             value={dataUser?.lastName || ""}
+                            error={formErreur?.lastName}
                         />
 
                         <Input
@@ -103,6 +108,7 @@ const AddUser: FC<IDialog> = ({
                             onChange={handleChange}
                             name="email"
                             value={dataUser?.email || ""}
+                            error={formErreur?.email}
                         />
 
                         <Input
@@ -114,6 +120,7 @@ const AddUser: FC<IDialog> = ({
                             type="number"
                             onChange={handleChange}
                             name="note"
+                            error={formErreur?.note}
                             value={dataUser?.note || ""}
                         />
 

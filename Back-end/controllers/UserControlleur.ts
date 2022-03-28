@@ -120,7 +120,7 @@ class USerController {
       // Savoir 
 
       const sorted: any[] = listNote.sort(
-        (a: any, b: any) => a.nbr - b.nbr
+        (a: any, b: any) => b.note - a.note
       );
 
       const lePremier = sorted[0];

@@ -11,7 +11,7 @@ import IUser from "../../Interface/User";
 
 
 const fabStyle = {
-    position: 'absolute',
+    position: 'fixed',
     bottom: 16,
     right: 16,
 };
@@ -26,7 +26,7 @@ const CreateUser: FC = (props) => {
 
     const [openDialog, setOpenDialog] = useState(false);
     const [loading, setLoading] = useState(false);
-
+    const [formErreur, setFormErreur] = useState<any>({})
     const { enqueueSnackbar } = useSnackbar();
 
     const theme = useTheme();
@@ -41,6 +41,19 @@ const CreateUser: FC = (props) => {
     }
 
     const addNewUser = async (user: IUser) => {
+
+        /**
+         * Verify obligatory
+         */
+
+        if (!verificationFormulaire(user)) {
+
+            enqueueSnackbar("Veuilliez remplir tous les champs", {
+                variant: "error",
+            });
+
+            return
+        }
 
         setLoading(true);
 
@@ -61,6 +74,11 @@ const CreateUser: FC = (props) => {
                     variant: "success",
                 });
 
+                UserStore.ListUser.push({
+                    ...user,
+                    dateCreated: new Date()
+                })
+
                 setLoading(false);
                 setOpenDialog(false);
 
@@ -74,6 +92,38 @@ const CreateUser: FC = (props) => {
 
     }
 
+    const verificationFormulaire = (user: any) => {
+
+        const FormOfVerifie = [
+            "firstName",
+            "lastName",
+            "email",
+            "note",
+        ];
+
+
+        const FormError: { [key: string]: boolean | string } = {};
+
+        FormOfVerifie.forEach((event: string) => {
+
+            if (!user?.[event] || user?.[event] === " ") {
+                FormError[event] = true;
+            }
+
+        });
+
+        setFormErreur(FormError);
+
+        if (Object.keys(FormError).length === 0) {
+            return true;
+        }
+
+
+
+        return false;
+
+    };
+
     return (
         <div>
 
@@ -82,6 +132,7 @@ const CreateUser: FC = (props) => {
                 handleClose={toggleOpen}
                 submit={addNewUser}
                 loading={loading}
+                formErreur={formErreur}
             />
 
             <Zoom
@@ -93,6 +144,7 @@ const CreateUser: FC = (props) => {
                     <AddIcon />
                 </Fab>
             </Zoom>
+
         </div>
     );
 }

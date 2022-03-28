@@ -6,4 +6,5 @@ export interface IUser extends Document {
     email: string;
     note: number;
     img: string;
+    dateCreated: Date;
 }

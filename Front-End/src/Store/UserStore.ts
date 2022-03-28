@@ -4,7 +4,7 @@ import config from "../config";
 import axios from "axios";
 
 export interface UserStoreInterface {
-    ListUser: IUser[] | [];
+    ListUser: IUser[] | any[];
     loading: boolean;
     upadeList: (data: any) => void;
     AddNewUSer: (user: IUser) => Promise<any>;
@@ -18,12 +18,13 @@ class UserStore implements UserStoreInterface {
 
     @observable loading = false;
 
-    @observable ListUser: IUser[] | [] = [{
+    @observable ListUser: IUser[] | any[] = [{
         firstName: " string;",
         lastName: " string;",
         email: " string;",
         note: 0,
-        img: " string;"
+        img: " string;",
+        dateCreated: new Date()
     }];
 
     constructor() {

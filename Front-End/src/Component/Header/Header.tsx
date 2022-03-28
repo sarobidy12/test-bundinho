@@ -28,23 +28,35 @@ const Header: FC = (props) => {
     const onKeyDown = (event: any) => {
         clearTimeout(typeTimeout);
         if (event.key === 'Enter') {
+            UserStore.setLoading(true);
+
             event.preventDefault();
             event.stopPropagation();
             UserStore
                 .filterUser(keyWord || "")
                 .then((res: any) => {
                     UserStore.upadeList(res.data.listUserFilter);
+                }).finally(() => {
+                    setTimeout(() => {
+                        UserStore.setLoading(false);
+                    }, 1000)
                 })
         }
     };
 
     const handleChange = (e: any) => {
         setKeyWord(e.target.value);
+        UserStore.setLoading(true);
+
         typeTimeout = setTimeout(function () {
             UserStore
                 .filterUser(e.target.value || "")
                 .then((res: any) => {
                     UserStore.upadeList(res.data.listUserFilter);
+                }).finally(() => {
+                    setTimeout(() => {
+                        UserStore.setLoading(false);
+                    }, 1000)
                 })
         }, 1000);
     };

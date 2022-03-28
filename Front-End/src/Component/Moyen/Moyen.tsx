@@ -28,7 +28,7 @@ const Moyen: FC = (props) => {
 
     useEffect(() => {
 
-        setLoading(true)
+        setLoading(true);
         UserStore.getMoyenne()
             .then((res: any) => {
                 setMoyenne(res.data);
@@ -46,7 +46,6 @@ const Moyen: FC = (props) => {
                 loading ? (
                     <>
                         <LoadingMoyene />
-
                     </>
                 ) : (
                     <Card sx={{ minWidth: 275 }}>
@@ -58,6 +57,8 @@ const Moyen: FC = (props) => {
                             <Typography variant="h2" component="div">
                                 {moyenne?.Moyen || 0}
                             </Typography>
+                            <hr />
+
                             <Typography sx={{ mb: 1.5 }} color="text.secondary">
                                 Le premiers
                             </Typography>
@@ -66,6 +67,7 @@ const Moyen: FC = (props) => {
                                 <br />
                                 {`Note : ${moyenne?.First.note || 0}`}
                             </Typography>
+                            <hr />
                             <Typography sx={{ mb: 1.5 }} color="text.secondary">
                                 Le dernier
                             </Typography>

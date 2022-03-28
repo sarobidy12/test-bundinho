@@ -4,6 +4,7 @@ export interface IUser {
     email: string;
     note: number;
     img: string;
+    dateCreated?: Date;
 }
 
 export default IUser; 

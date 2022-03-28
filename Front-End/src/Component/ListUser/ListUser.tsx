@@ -10,7 +10,6 @@ import Grid from '@mui/material/Grid';
 import Moyen from "../Moyen";
 import { LoadingList } from "../Utils/Loading";
 
-
 interface IApp {
     UserStore: UserStoreInterface
 }
@@ -32,6 +31,17 @@ const ListUser: FC = (props) => {
             });
     }, [UserStore])
 
+    const sortByDate = () => {
+        return UserStore.ListUser
+            .slice()
+            .sort((a: any, b: any) => {
+
+                const date1 = new Date(a.dateCreated).getTime();
+                const date2 = new Date(b.dateCreated).getTime();
+                return date2 - date1;
+            })
+    }
+
     return (
         <Container>
 
@@ -42,19 +52,23 @@ const ListUser: FC = (props) => {
 
                 <Grid item={true} md={6} xs={12}>
 
+                    {console.log("sortByDate", sortByDate())}
+
                     {
                         UserStore.loading ? (
                             <LoadingList />
                         ) : (
                             <>
                                 {
-                                    UserStore.ListUser.map((user: IUser) => <ItemUser
-                                        img={user.img}
-                                        firstName={user.firstName}
-                                        lastName={user.lastName}
-                                        note={user.note}
-                                        email={user.email}
-                                    />)
+
+                                    sortByDate()
+                                        .map((user: IUser) => <ItemUser
+                                            img={user.img}
+                                            firstName={user.firstName}
+                                            lastName={user.lastName}
+                                            note={user.note}
+                                            email={user.email}
+                                        />)
                                 }
                             </>
                         )
