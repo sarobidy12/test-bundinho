@@ -19,11 +19,11 @@ class UserStore implements UserStoreInterface {
     @observable loading = false;
 
     @observable ListUser: IUser[] | any[] = [{
-        firstName: " string;",
-        lastName: " string;",
-        email: " string;",
+        firstName: "test",
+        lastName: " test;",
+        email: " test;",
         note: 0,
-        img: " string;",
+        img: " test;",
         dateCreated: new Date()
     }];
 

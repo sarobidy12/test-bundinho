@@ -48,37 +48,40 @@ const Moyen: FC = (props) => {
                         <LoadingMoyene />
                     </>
                 ) : (
-                    <Card sx={{ minWidth: 275 }}>
+                    <>
+                        {moyenne?.Moyen !== 0 && (<Card sx={{ minWidth: 275 }} >
 
-                        <CardContent>
-                            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                La moyenne
-                            </Typography>
-                            <Typography variant="h2" component="div">
-                                {moyenne?.Moyen || 0}
-                            </Typography>
-                            <hr />
+                            <CardContent>
+                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                    La moyenne
+                                </Typography>
+                                <Typography variant="h2" component="div">
+                                    {moyenne?.Moyen || 0}
+                                </Typography>
+                                <hr />
 
-                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                Le premiers
-                            </Typography>
-                            <Typography variant="body2">
-                                {`${moyenne?.First.firstName || ""}  ${moyenne?.First.lastName || ""}` || ""}
-                                <br />
-                                {`Note : ${moyenne?.First.note || 0}`}
-                            </Typography>
-                            <hr />
-                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                Le dernier
-                            </Typography>
-                            <Typography variant="body2">
-                                {`${moyenne?.Dernier.firstName || ""}  ${moyenne?.Dernier.lastName || ""}` || ""}
-                                <br />
-                                {`Note : ${moyenne?.Dernier.note || 0}`}
-                            </Typography>
-                        </CardContent>
+                                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                    Le premiers
+                                </Typography>
+                                <Typography variant="body2">
+                                    {`${moyenne?.First.firstName || ""}  ${moyenne?.First.lastName || ""}` || ""}
+                                    <br />
+                                    {`Note : ${moyenne?.First.note || 0}`}
+                                </Typography>
+                                <hr />
+                                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                    Le dernier
+                                </Typography>
+                                <Typography variant="body2">
+                                    {`${moyenne?.Dernier.firstName || ""}  ${moyenne?.Dernier.lastName || ""}` || ""}
+                                    <br />
+                                    {`Note : ${moyenne?.Dernier.note || 0}`}
+                                </Typography>
+                            </CardContent>
 
-                    </Card>
+                        </Card>)}
+                    </>
+
                 )
 
             }
