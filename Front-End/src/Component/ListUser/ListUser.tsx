@@ -8,6 +8,8 @@ import ItemUser from "./ItemUser";
 import IUser from "../../Interface/User";
 import Grid from '@mui/material/Grid';
 import Moyen from "../Moyen";
+import { LoadingList } from "../Utils/Loading";
+
 
 interface IApp {
     UserStore: UserStoreInterface
@@ -18,9 +20,15 @@ const ListUser: FC = (props) => {
     const { UserStore } = props as IApp;
 
     useEffect(() => {
+        UserStore.setLoading(true);
         UserStore.getListUser()
             .then((res: any) => {
+
                 UserStore.upadeList(res.data.listUser);
+            }).finally(() => {
+                setTimeout(() => {
+                    UserStore.setLoading(false);
+                }, 1000)
             });
     }, [UserStore])
 
@@ -33,15 +41,25 @@ const ListUser: FC = (props) => {
                 </Grid>
 
                 <Grid item={true} md={6} xs={12}>
+
                     {
-                        UserStore.ListUser.map((user: IUser) => <ItemUser
-                            img={user.img}
-                            firstName={user.firstName}
-                            lastName={user.lastName}
-                            note={user.note}
-                            email={user.email}
-                        />)
+                        UserStore.loading ? (
+                            <LoadingList />
+                        ) : (
+                            <>
+                                {
+                                    UserStore.ListUser.map((user: IUser) => <ItemUser
+                                        img={user.img}
+                                        firstName={user.firstName}
+                                        lastName={user.lastName}
+                                        note={user.note}
+                                        email={user.email}
+                                    />)
+                                }
+                            </>
+                        )
                     }
+
                 </Grid>
 
                 <Grid item={true} md={2} xs={12}>

@@ -4,22 +4,19 @@ import config from "../config";
 import axios from "axios";
 
 export interface UserStoreInterface {
-    testValue: string;
-    dataSelected: any;
     ListUser: IUser[] | [];
+    loading: boolean;
     upadeList: (data: any) => void;
     AddNewUSer: (user: IUser) => Promise<any>;
     getListUser: () => Promise<any>;
     getMoyenne: () => Promise<any>;
     filterUser: (email: string) => Promise<any>;
+    setLoading: (loading: boolean) => void;
 }
-
 
 class UserStore implements UserStoreInterface {
 
-    @observable testValue = "test";
-
-    @observable dataSelected: any;
+    @observable loading = false;
 
     @observable ListUser: IUser[] | [] = [{
         firstName: " string;",
@@ -65,6 +62,13 @@ class UserStore implements UserStoreInterface {
     @action getMoyenne = async () => {
 
         return await axios.get(`${config.servers.apiUrl}user/moyenne`);
+
+    };
+
+
+    @action setLoading = async (loading: boolean) => {
+
+        this.loading = loading;
 
     };
 
