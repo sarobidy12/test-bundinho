@@ -38,7 +38,7 @@ const Moyen: FC = (props) => {
                 }, 1000)
             });
 
-    }, [UserStore]);
+    }, [UserStore, UserStore.ListUser.length]);
 
     return (
         <>

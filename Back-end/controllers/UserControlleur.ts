@@ -128,7 +128,7 @@ class USerController {
 
       // calcul moyenne
 
-      const moyen = note / listNote.length;
+      const moyen = (note / listNote.length).toFixed(2).replace('.00', '');
 
       res.status(200).send({
         "Moyen": moyen,
